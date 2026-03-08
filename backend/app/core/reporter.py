@@ -9,6 +9,9 @@ def build_report(analysis: LLMAnalysisResult) -> ReportResponse:
     )
 
     return ReportResponse(
+        candidate_name=analysis.candidate_name,
+        candidate_email=analysis.candidate_email,
+        candidate_phone=analysis.candidate_phone,
         overall_score=overall_score,
         category=get_category(overall_score),
         detected_role=analysis.detected_role.value,

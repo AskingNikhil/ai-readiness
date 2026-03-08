@@ -23,6 +23,9 @@ class DimensionScores(BaseModel):
 
 class LLMAnalysisResult(BaseModel):
     """Structured output returned by Claude after analyzing the resume."""
+    candidate_name: str | None = Field(None, description="Full name extracted from resume, null if not found")
+    candidate_email: str | None = Field(None, description="Email address extracted from resume, null if not found")
+    candidate_phone: str | None = Field(None, description="Phone/contact number extracted from resume, null if not found")
     detected_role: RoleType = Field(..., description="Primary professional role inferred from resume")
     role_confidence: float = Field(..., ge=0, le=1, description="Confidence score for role detection 0-1")
     dimension_scores: DimensionScores
@@ -35,6 +38,9 @@ class LLMAnalysisResult(BaseModel):
 
 class ReportResponse(BaseModel):
     """Final API response returned to the frontend."""
+    candidate_name: str | None = None
+    candidate_email: str | None = None
+    candidate_phone: str | None = None
     overall_score: float = Field(..., ge=0, le=100)
     category: str = Field(..., description="AI Unaware / AI Curious / AI Practitioner / AI Advanced / AI Native")
     detected_role: str

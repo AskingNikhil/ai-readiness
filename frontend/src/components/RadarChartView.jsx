@@ -1,11 +1,6 @@
 import {
-  Radar,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  ResponsiveContainer,
-  Tooltip,
+  Radar, RadarChart, PolarGrid, PolarAngleAxis,
+  PolarRadiusAxis, ResponsiveContainer, Tooltip,
 } from 'recharts'
 
 export default function RadarChartView({ scores }) {
@@ -18,32 +13,38 @@ export default function RadarChartView({ scores }) {
   ]
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8">
-      <h3 className="text-lg font-bold text-gray-800 mb-4">Capability Radar</h3>
-      <ResponsiveContainer width="100%" height={280}>
+    <div className="ug-card" style={{ padding: '28px' }}>
+      <h3 style={{ fontSize: '16px', fontWeight: '600', color: '#212835', margin: '0 0 20px' }}>Capability Radar</h3>
+      <ResponsiveContainer width="100%" height={270}>
         <RadarChart data={data}>
-          <PolarGrid stroke="#e5e7eb" />
+          <PolarGrid stroke="#ebecee" />
           <PolarAngleAxis
             dataKey="dimension"
-            tick={{ fontSize: 11, fill: '#6b7280' }}
+            tick={{ fontSize: 11, fill: '#586274', fontFamily: 'Inter, sans-serif' }}
           />
           <PolarRadiusAxis
             angle={90}
             domain={[0, 100]}
-            tick={{ fontSize: 9, fill: '#9ca3af' }}
+            tick={{ fontSize: 9, fill: '#bfbfbf' }}
             tickCount={5}
           />
           <Radar
             name="Score"
             dataKey="score"
-            stroke="#6366f1"
-            fill="#6366f1"
-            fillOpacity={0.25}
+            stroke="#ee2c3c"
+            fill="#ee2c3c"
+            fillOpacity={0.15}
             strokeWidth={2}
           />
           <Tooltip
             formatter={(value) => [`${value} / 100`, 'Score']}
-            contentStyle={{ borderRadius: '8px', fontSize: '12px' }}
+            contentStyle={{
+              borderRadius: '6px',
+              fontSize: '12px',
+              border: '1px solid #ebecee',
+              boxShadow: '0 4px 10px rgba(0,0,0,0.08)',
+              fontFamily: 'Inter, sans-serif',
+            }}
           />
         </RadarChart>
       </ResponsiveContainer>

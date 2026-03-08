@@ -43,6 +43,18 @@ ANALYSIS_TOOL = {
     "input_schema": {
         "type": "object",
         "properties": {
+            "candidate_name": {
+                "type": ["string", "null"],
+                "description": "Full name of the candidate as it appears on the resume. Null if not found."
+            },
+            "candidate_email": {
+                "type": ["string", "null"],
+                "description": "Email address of the candidate. Null if not found."
+            },
+            "candidate_phone": {
+                "type": ["string", "null"],
+                "description": "Phone or contact number of the candidate. Null if not found."
+            },
             "detected_role": {
                 "type": "string",
                 "enum": ["Engineer", "ProductManager", "Marketing", "HR", "Finance", "Operations", "Business", "DataScientist"],
@@ -89,6 +101,7 @@ ANALYSIS_TOOL = {
             }
         },
         "required": [
+            "candidate_name", "candidate_email", "candidate_phone",
             "detected_role", "role_confidence", "dimension_scores",
             "key_signals", "strengths", "gaps", "improvement_suggestions", "candidate_summary"
         ]
@@ -120,6 +133,9 @@ Analyze the resume carefully. Identify both explicit and implicit signals of AI 
     data = tool_use_block.input
 
     return LLMAnalysisResult(
+        candidate_name=data.get("candidate_name"),
+        candidate_email=data.get("candidate_email"),
+        candidate_phone=data.get("candidate_phone"),
         detected_role=RoleType(data["detected_role"]),
         role_confidence=float(data["role_confidence"]),
         dimension_scores=DimensionScores(**data["dimension_scores"]),

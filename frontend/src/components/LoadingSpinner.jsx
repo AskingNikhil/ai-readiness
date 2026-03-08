@@ -1,9 +1,22 @@
 export default function LoadingSpinner() {
   return (
-    <div className="flex flex-col items-center justify-center py-20">
-      <div className="w-16 h-16 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4" />
-      <p className="text-gray-500 text-sm">Claude is analyzing your resume...</p>
-      <p className="text-gray-400 text-xs mt-1">This usually takes 10–20 seconds</p>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '80px 24px' }}>
+      <div style={{
+        width: '52px',
+        height: '52px',
+        border: '3px solid #fcd5d8',
+        borderTopColor: '#ee2c3c',
+        borderRadius: '50%',
+        animation: 'spin 0.8s linear infinite',
+        marginBottom: '20px',
+      }} />
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      <p style={{ fontSize: '15px', fontWeight: '500', color: '#212835', margin: '0 0 6px' }}>
+        Analyzing your resume...
+      </p>
+      <p style={{ fontSize: '13px', color: '#586274', margin: 0 }}>
+        Claude is evaluating AI readiness across 5 dimensions. This takes 10–20 seconds.
+      </p>
     </div>
   )
 }
